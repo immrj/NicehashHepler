@@ -19,9 +19,10 @@
   "content_scripts": [
     {
       "matches":["http://*/*","https://*/*"],
-      "js":["js/jquery-2.0.0.min.js", "js/injection.js"],
-      "css": ["css/injection.css", "css/common.css"],
-      "run_at":"document_start"
+      "css": ["css/amazeui_fix.css", "css/injection.css", "css/common.css"],
+      "js":["js/jquery-2.0.0.min.js", "amazeui/js/amazeui.min.js", "js/injection.js"],
+      "run_at":"document_end",
+      "all_frames": true
     }
   ]
 }

@@ -1,10 +1,75 @@
 #nhh-main{
     width: 100%;
+}
+
+#nhh-main .title{
     height: 40px;
     line-height: 40px;
-    background-color: rgba(255, 0, 0, .75);
     text-align: center;
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
     font-family: "Microsoft Sans Serif";
+    background-color: rgba(108, 144, 50, .7);
+}
+
+#nhh-main .content{
+    background-color: #eee;
+}
+#nhh-main .content .sub-title{
+    margin: 0 15%;
+    padding: 15px 0;
+    font-size: 22px;
+    border-bottom: 1px solid #aaa;
+}
+#nhh-main .content .setting{
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.row .left, .row .right{
+    float: left;
+    width: 50%;
+    height: 36px;
+    margin-top: 15px;
+}
+.row .left label, .row .right label{
+    float: left;
+    width: 33.33%;
+    text-align: right;
+    height: 36px;
+    line-height: 36px;
+}
+.row .left > div, .row .right > div{
+    float: left;
+    width: 66.67%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+.row select, .row input[type="text"]{
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+#nhh-main .row input[type="checkbox"]{
+    margin: 11px 0;
+}
+#nhh-main .sub-btn{
+    width: 50%;
+    color: #fff;
+    margin-top: 15px;
 }
