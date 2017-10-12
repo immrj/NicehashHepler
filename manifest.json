@@ -19,7 +19,8 @@
   "content_scripts": [
     {
       "matches":["http://*/*","https://*/*"],
-      "js":["js/jquery-2.0.0.min.js", "js/nhHepler.js"],
+      "js":["js/jquery-2.0.0.min.js", "js/injection.js"],
+      "css": ["css/injection.css", "css/common.css"],
       "run_at":"document_start"
     }
   ]
