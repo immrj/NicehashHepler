@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "name": "NicehashHelper",
+  "description": "Nicehash Helper",
+  "browser_action": {
+    "default_icon": "image/nicehash.png",
+    "default_title": "Nicehash Hepler",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page":"background.html"
+  },
+  "content_scripts": [
+    {
+      "matches":["http://*/*","https://*/*"],
+      "js":["js/jquery-2.0.0.min.js", "js/nhHepler.js"],
+      "run_at":"document_start"
+    }
+  ]
+}
