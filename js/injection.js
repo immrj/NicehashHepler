@@ -1,66 +1,151 @@
 var injection = {
+    autoPost: false,
 
-    showSetting: function () {
-        var c = setTimeout(function () {
+    bindEvents: function () {
+        var self = this;
 
-        }, 50000)
+        $('.fix-price').on('change', function () {
+            if(isNaN(this.value)){
+                $(this).val('')
+                $(this).focus()
+            }
+            if(this.value > 0.025){
+                var r = confirm("价格过高，确定继续？");
+                if(!r){
+                    $(this).focus()
+                }
+            }else if(this.value <= 0){
+                alert('输入错误！');
+                $(this).val('').focus()
+            }
+        })
+
+        $('.query-rate').on('change', function () {
+            if(isNaN(this.value)){
+                $(this).val('')
+                $(this).focus()
+            }
+            if(this.value <= 0){
+                alert('输入错误！');
+                $(this).val('').focus()
+            }
+        })
+
+        $('#auto-post').on('change', function(){
+            if($(this).prop('checked')){
+                self.autoPost = true;
+                self.getPools();
+                $('.auto-sub-info').slideDown()
+                $('#nhh-main .setting').height('330px');
+            }else{
+                self.autoPost = false;
+                $('.auto-sub-info').slideUp()
+                $('#nhh-main .setting').height('260px');
+            }
+        })
+
+        $('.sub-btn').on('click', function () {
+            self.checkData()
+        })
+
     },
 
+    getAglo: function () {
+        var aglos = $($('.marketplace select')[0]).children().clone();
+        $('#nhh-main .algo').empty().append(aglos);
+    },
+
+    getPools: function () {
+        var pools = $($('select[name=pool]')[0]).children().clone();
+        pools.slice(0, -1)
+        $('.auto-sub-info .pools').empty().append(pools);
+    },
+
+    getCurrentFixedPrice: function () {
+        var self = this;
+        var $eufixBtns = $($('.marketplace .eu .add .button')[1]);
+        var $usafixBtns = $($('.marketplace .usa .add .button')[1]);
+        if($eufixBtns){
+            $eufixBtns.click();
+            $usafixBtns.click();
+            var $euPrice = $('.eu input[name=fixedPrice]');
+            var $usaPrice = $('.usa input[name=fixedPrice]');
+            var x = setTimeout(function () {
+                if($euPrice.val()){
+                    $('.euPrice').text($euPrice.val());
+                    $('.usaPrice').text($usaPrice.val());
+                }else{
+                    alert('can not get price !')
+                }
+                clearTimeout(x);
+            }, 3000)
+        }
+    },
+
+    checkData: function () {
+        if(this.autoPost){
+
+        }else{
+
+        }
+    },
 
     init: function () {
         var insertHtml =
-            "<div id='nhh-main' class='hide'>" +
-                "<div class='title'>Thank you for using Nicehash Hepler!&emsp;By <a href='mailto:j_1230223@sina.com'>Kemosabe</a></div>" +
-                "<div class='content'>" +
-                    "<div class='sub-title'>设置（固定模式）</div>" +
+            "<div id='nhh-main' class='nhh-hide'>" +
+                "<div class='nhh-title'>Thank you for using Nicehash Hepler!&emsp;By <a href='mailto:j_1230223@sina.com'>Kemosabe</a></div>" +
+                "<div class='nhh-content'>" +
+                    "<div class='nhh-sub-title'>设置（固定模式）</div>" +
                     "<div class='setting'>" +
+                        "<div class='row'>" +
+                            "<div class='left'>" +
+                                "<label>EU固定价格</label>" +
+                                "<div>" +
+                                    "<span class='fixed euPrice'>N/A</span><span class='unit'>BTC/GB/day</span>" +
+                                "</div>" +
+                            "</div>" +
+                            "<div class='right'>" +
+                                "<label>USA固定价格</label>" +
+                                "<div>" +
+                                    "<span class='fixed usaPrice'>N/A</span><span class='unit'>BTC/GB/day</span>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
                         "<div class='row'>" +
                             "<div class='left'>" +
                                 "<label>算法</label>" +
                                 "<div>" +
                                     "<select class='algo'>" +
-                                        "<option value='0'>Scrypt</option>" +
-                                        "<option value='1'>SHA256</option>" +
-                                        "<option value='2'>ScryptNf</option>" +
-                                        "<option value='3'>X11</option>" +
-                                        "<option value='4'>X13</option>" +
-                                        "<option value='5'>Keccak</option>" +
-                                        "<option value='6'>X15</option>" +
-                                        "<option value='7'>Nist5</option>" +
                                     "</select>" +
                                 "</div>" +
                             "</div>" +
                             "<div class='right'>" +
                                 "<label>自动提交</label>" +
                                 "<div>" +
-                                    "<input type='checkbox'>" +
+                                    "<input id='auto-post' type='checkbox'>" +
                                 "</div>" +
                             "</div>" +
                         "</div>" +
                         "<div class='row'>" +
                             "<div class='left'>" +
-                                "<label>价格</label>" +
+                                "<label>价格阈值（BTC）</label>" +
                                 "<div>" +
-                                    "<input type='text' placeholder='最高固定价格'>" +
+                                    "<input class='fix-price' type='text' placeholder='最高固定价格'>" +
                                 "</div>" +
                             "</div>" +
                             "<div class='right'>" +
+                                "<label>查询频率（秒）</label>" +
+                                "<div>" +
+                                    "<input class='query-rate' type='text' placeholder='查询固定价格间隔时间，推荐30秒'/>" +
+                                "</div>" +
                             "</div>" +
                         "</div>" +
-                        "<div class='auto-sub-info hide'>" +
+                        "<div class='auto-sub-info nhh-hide'>" +
                             "<div class='row'>" +
                                 "<div class='left'>" +
                                     "<label>矿池</label>" +
                                     "<div>" +
-                                        "<select class='algo'>" +
-                                            "<option value='0'>LXM</option>" +
-                                            "<option value='1'>2</option>" +
-                                            "<option value='2'>3</option>" +
-                                            "<option value='3'>4</option>" +
-                                            "<option value='4'>5</option>" +
-                                            "<option value='5'>4</option>" +
-                                            "<option value='6'>3</option>" +
-                                            "<option value='7'>2</option>" +
+                                        "<select class='pools'>" +
                                         "</select>" +
                                     "</div>" +
                                 "</div>" +
@@ -95,13 +180,19 @@ var injection = {
 
                     "</div>" +
                 "</div>" +
+
             "</div>";
-        $('body').prepend(insertHtml);
+        $($('body')[0]).prepend(insertHtml);
 
         $('#nhh-main').slideDown();
 
-        this.showSetting();
+        this.bindEvents();
+
+        this.getAglo();
+
+        this.getCurrentFixedPrice();
     }
 }
-
-injection.init();
+setTimeout(function () {
+    injection.init();
+}, 3000)

@@ -18,7 +18,7 @@
   },
   "content_scripts": [
     {
-      "matches":["http://*/*","https://*/*"],
+      "matches":["https://www.nicehash.com/marketplace*"],
       "css": ["css/amazeui_fix.css", "css/injection.css", "css/common.css"],
       "js":["js/jquery-2.0.0.min.js", "amazeui/js/amazeui.min.js", "js/injection.js"],
       "run_at":"document_end",

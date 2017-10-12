@@ -1,8 +1,9 @@
 #nhh-main{
     width: 100%;
+    padding-top: 54px;
 }
 
-#nhh-main .title{
+#nhh-main .nhh-title{
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -12,22 +13,34 @@
     background-color: rgba(108, 144, 50, .7);
 }
 
-#nhh-main .content{
+#nhh-main .nhh-content{
     background-color: #eee;
 }
-#nhh-main .content .sub-title{
+#nhh-main .nhh-content .nhh-sub-title{
     margin: 0 15%;
     padding: 15px 0;
     font-size: 22px;
     border-bottom: 1px solid #aaa;
 }
-#nhh-main .content .setting{
+#nhh-main .nhh-content .setting{
     width: 80%;
-    height: 200px;
+    height: 260px;
     margin: auto;
     padding: 20px 0;
+    transition: .3s;
 }
-
+.row span{
+    line-height: 36px;
+}
+.row span.fixed{
+    color: red;
+    font-size: 18px;
+    margin: 0 25px;
+}
+.row span.unit{
+    color: gray;
+    font-size: 12px;
+}
 .row .left, .row .right{
     float: left;
     width: 50%;
